@@ -1,0 +1,1 @@
+vk_api_token = 'cce7531bc26fe4cded9971b8df7f8c555a076bab1a72053fd307c5c145a4c79277aeb8927bf6db98fcea0'
