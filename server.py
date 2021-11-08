@@ -6,7 +6,7 @@ from vk_api import VkUpload
 from os import getcwd, listdir
 from os.path import isfile, join
 
-my_path = getcwd()
+my_path = getcwd() + '\\NSFW'
 all_files = [f for f in listdir(my_path) if isfile(join(my_path, f))]
 
 
