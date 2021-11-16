@@ -1,0 +1,32 @@
+{
+  "inline": true,
+  "one_time": false,
+  "buttons": [
+    [
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Dressed"
+        },
+        "color": "positive"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Naked"
+        },
+        "color": "negative"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "More naked"
+        },
+        "color": "primary"
+      }
+    ]
+  ]
+}

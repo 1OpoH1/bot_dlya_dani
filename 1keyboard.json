@@ -1,6 +1,6 @@
 {
   "inline": false,
-  "one_time": true,
+  "one_time": false,
   "buttons": [
     [
       {

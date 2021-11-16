@@ -6,7 +6,7 @@ from vk_api import VkUpload
 from os import getcwd, listdir
 from os.path import isfile, join
 
-my_path = getcwd() + '' #TODO Даня, измени путь файла
+my_path = getcwd() + ''  # TODO Даня, измени путь файла
 all_files = [f for f in listdir(my_path) if isfile(join(my_path, f))]
 
 
@@ -41,6 +41,54 @@ class Server:
             if event.type == VkBotEventType.MESSAGE_NEW:
                 if event.object.message["from_id"] not in self.users:
                     self.users[event.object.message["from_id"]] = User()
+                if 'Dressed' in event.object.message["text"]:
+                    text = event.object.message["text"]
+                    picture = self.send_picture(
+                        self.users[event.object.message["from_id"]].find_dress(type='-r'))
+                    if picture:
+                        self.send_message(
+                            event.object.message["peer_id"],
+                            '\t',
+                            keyboard='keyboard_dress.json',
+                            attachment=picture)
+                    else:
+                        self.send_message(
+                            event.object.message["peer_id"],
+                            'У этой картинки нет аналога',
+                            keyboard=f'{self.users[event.object.message["from_id"]].number_of_keyboard}keyboard.json'
+                        )
+                if 'Naked' in event.object.message["text"]:
+                    text = event.object.message["text"]
+                    picture = self.send_picture(
+                        self.users[event.object.message["from_id"]].find_dress(type='-o'))
+                    if picture:
+                        self.send_message(
+                            event.object.message["peer_id"],
+                            '\t',
+                            keyboard='keyboard_dress.json',
+                            attachment=picture)
+                    else:
+                        self.send_message(
+                            event.object.message["peer_id"],
+                            'У этой картинки нет аналога',
+                            keyboard=f'{self.users[event.object.message["from_id"]].number_of_keyboard}keyboard.json'
+                        )
+                if 'naked' in event.object.message["text"]:
+                    text = event.object.message["text"]
+                    picture = self.send_picture(
+                        self.users[event.object.message["from_id"]].find_dress(type='-mr'))
+                    if picture:
+                        self.send_message(
+                            event.object.message["peer_id"],
+                            '\t',
+                            keyboard='keyboard_dress.json',
+                            attachment=picture)
+                    else:
+                        self.send_message(
+                            event.object.message["peer_id"],
+                            'У этой картинки нет аналога',
+                            keyboard=f'{self.users[event.object.message["from_id"]].number_of_keyboard}keyboard.json'
+                        )
                 if '16+' in event.object.message["text"]:
                     self.users[event.object.message["from_id"]].x = False
                     self.send_message(
@@ -59,21 +107,35 @@ class Server:
                         "Данный бот выводит картинки эротического содержания, выберите возраст получаемых картинок",
                         "start_keyboard.json")
                 if 'Влево' in event.object.message["text"] or 'Вправо' in event.object.message["text"]:
-                  self.users[event.object.message["from_id"]].num_keyboard(event.object.message["text"])
-                  if not self.users[event.object.message["from_id"]].x:
-                        self.send_message(event.object.message["peer_id"], self.users[event.object.message["from_id"]].number_of_keyboard, f'{self.users[event.object.message["from_id"]].number_of_keyboard}keyboard.json')
-                  else:
-                        self.send_message(event.object.message["peer_id"], self.users[event.object.message["from_id"]].number_of_keyboard_x, f'{self.users[event.object.message["from_id"].number_of_keyboard_x]}keyboard.json')
+                    self.users[event.object.message["from_id"]].num_keyboard(event.object.message["text"])
+                    if not self.users[event.object.message["from_id"]].x:
+                        self.send_message(event.object.message["peer_id"],
+                                          "\t",
+                                          f'{self.users[event.object.message["from_id"]].number_of_keyboard}keyboard.json')
+                    else:
+                        self.send_message(event.object.message["peer_id"],
+                                          self.users[event.object.message["from_id"]].number_of_keyboard_x,
+                                          f'{self.users[event.object.message["from_id"].number_of_keyboard_x]}keyboard.json')
                 if event.object.message["text"] in self.titles:
-                  picture = self.send_picture(self.users[event.object.message["from_id"]].find_picture(event.object.message["text"]))
-                  if picture:
-                      self.send_message(
-                      event.object.message["peer_id"],
-                      '\t',
-                      attachment=picture)
-                  else:
-                    self.users[event.object.message["from_id"]].shuffle_files()
-                    self.send_message(event.object.message["peer_id"], 'Картинки кончились, но мы их сейчас перемешаем...', keyboard=f"{self.users[event.object.message['from_id']].number_of_keyboard}keyboard.json")
+                    pict = self.users[event.object.message["from_id"]].find_picture(event.object.message["text"])
+                    picture = self.send_picture(pict)
+                    if picture:
+                        if '-' in pict:
+                            keyboard = 'keyboard_dress.json'
+                        elif '-mr' in pict:
+                            keyboard = 'super_keyboard_dress.json'
+                        else:
+                            keyboard = f'{self.users[event.object.message["from_id"]].number_of_keyboard}keyboard.json'
+                        self.send_message(
+                            event.object.message["peer_id"],
+                            '\t',
+                            keyboard=keyboard,
+                            attachment=picture)
+                    else:
+                        self.users[event.object.message["from_id"]].shuffle_files()
+                        self.send_message(event.object.message["peer_id"],
+                                          'Картинки кончились, но мы их сейчас перемешаем...',
+                                          keyboard=f"{self.users[event.object.message['from_id']].number_of_keyboard}keyboard.json")
 
     def send_message(self,
                      peer_id,
@@ -97,7 +159,8 @@ class Server:
 
 class User():
     def __init__(self):
-        self.number_of_keyboard, self.number_of_keyboard_x = 0, 0
+        self.picture_name = ''
+        self.number_of_keyboard, self.number_of_keyboard_x = 1, 1
         self.reserve_files = all_files
         self.files_not_x = list(filter(lambda x: x[0] != 'x', self.reserve_files))
         shuffle(self.files_not_x)
@@ -153,15 +216,15 @@ class User():
     def num_keyboard(self, message):
         if not self.x:
             if message.lower() == 'влево':
-                self.number_of_keyboard = 1 +(self.number_of_keyboard + 1) % 3
+                self.number_of_keyboard = 1 + (self.number_of_keyboard + 1) % 3
             else:
-                self.number_of_keyboard = 1 +(self.number_of_keyboard) % 3
+                self.number_of_keyboard = 1 + (self.number_of_keyboard) % 3
             return self.number_of_keyboard
         else:
             if message.lower() == 'влево':
-                self.number_of_keyboard_x = 1 +(self.number_of_keyboard_x + 1) % 3
+                self.number_of_keyboard_x = 1 + (self.number_of_keyboard_x + 1) % 3
             else:
-                self.number_of_keyboard_x = 1 +(self.number_of_keyboard_x) % 3
+                self.number_of_keyboard_x = 1 + (self.number_of_keyboard_x) % 3
             return self.number_of_keyboard_x
 
     def search_name(self, name: str):
@@ -179,21 +242,34 @@ class User():
         try:
             if '@' in files[0]:
                 return self.find_comics(files[0])
+            if '-o' in files[0] or '-r' in files[0] or '-mr' in files[0]:
+                self.picture_name = files[0]
             if self.x:
                 self.files.pop(self.files.index(files[0]))
             else:
                 self.files_not_x.pop(self.files_not_x.index(files[0]))
             return files[0]
         except IndexError:
-          return "Нет картинок по такому запросу"
+            return "Нет картинок по такому запросу"
         except ValueError:
-          return "Такой картинки нет"
-   
+            return "Такой картинки нет"
+
+    def find_dress(self, type='-r'):
+        print(type)
+        name = self.picture_name.split(type)
+        files_with_name = self.search_name(name[0])
+        files = list(filter(lambda x: name[0] in x and name[1].lower() in x.lower(), files_with_name))
+        file = list(filter(lambda x: type not in x, files))
+        if len(file):
+            return file[0]
+        print(files)
+        return 'Нет таких картинок'
+
     def shuffle_files(self):
-      if self.x:
+        if self.x:
             self.files = list(filter(lambda x: x.startswith('x'), self.reserve_files))
             shuffle(self.files)
-      else:
+        else:
             self.files_not_x = list(filter(lambda x: x[0] != 'x', self.reserve_files))
             shuffle(self.files_not_x)
 
