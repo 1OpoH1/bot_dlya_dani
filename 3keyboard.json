@@ -1,0 +1,160 @@
+{
+  "inline": false,
+  "one_time": true,
+  "buttons": [
+    [
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Star vs Evil"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Shield Hero"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Samurai Jack"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Gwen Stacy"
+        },
+        "color": "primary"
+      }
+    ],
+    [
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Total drama"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Steven's Universe"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Ben 10"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Rick and Morty"
+        },
+        "color": "primary"
+      }
+    ],
+    [
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Dragon Maid"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Darling in the Franxx"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Sword Art Online"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Bioshock Infinite"
+        },
+        "color": "primary"
+      }
+    ],
+    [
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Doki Doki"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Kim Possible"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Avatar"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Pokemon"
+        },
+        "color": "primary"
+      }
+    ],
+    [
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Влево"
+        },
+        "color": "positive"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Вправо"
+        },
+        "color": "positive"
+      }
+    ]
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "inline": false,
+  "one_time": true,
+  "buttons": [
+    [
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Meru the Succubus"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Gravity Falls"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Adventure Time"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Lola Bunny"
+        },
+        "color": "primary"
+      }
+    ],
+    [
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Teen Titans"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Samsung"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Chainsaw man"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "NieR: Automata"
+        },
+        "color": "primary"
+      }
+    ],
+    [
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Kill la Kill"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Re:Zero"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Uzaki-chan"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Hatsune miku"
+        },
+        "color": "primary"
+      }
+    ],
+    [
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Teenage Robot"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Naruto"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Gawr Gura"
+        },
+        "color": "primary"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "TenSura"
+        },
+        "color": "primary"
+      }
+    ],
+    [
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Влево"
+        },
+        "color": "positive"
+      },
+      {
+        "action": {
+          "type": "text",
+          "payload": "",
+          "label": "Вправо"
+        },
+        "color": "positive"
+      }
+    ]
+  ]
+}

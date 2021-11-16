@@ -6,7 +6,7 @@ from vk_api import VkUpload
 from os import getcwd, listdir
 from os.path import isfile, join
 
-my_path = getcwd() + '\\NSFW' #TODO Даня, измени путь файла
+my_path = getcwd() + '' #TODO Даня, измени путь файла
 all_files = [f for f in listdir(my_path) if isfile(join(my_path, f))]
 
 
@@ -26,7 +26,7 @@ class Server:
             'Meru the Succubus', 'Adventure Time', 'Lola Bunny', 'Teen Titans',
             'Samsung', 'Chainsaw man', 'NieR: Automata', 'Kill la Kill',
             'Re:Zero', 'Uzaki-chan', 'Hatsune miku', 'Teenage Robot', 'Naruto',
-            'Gawr Gura', 'TenSura', 'Doki Doki', 'Kim Posiible', 'Avatar',
+            'Gawr Gura', 'TenSura', 'Doki Doki', 'Kim Possible', 'Avatar',
             'Star vs Evil', 'Shield Hero', 'Samurai Jack', 'Gwen Stacy',
             'Total drama', "Steven's Universe", 'Ben 10', 'Rick and Morty',
             'Dragon Maid', 'Darling in the Franxx', 'Sword Art Online',
@@ -41,43 +41,44 @@ class Server:
             if event.type == VkBotEventType.MESSAGE_NEW:
                 if event.object.message["from_id"] not in self.users:
                     self.users[event.object.message["from_id"]] = User()
-                if 'Влево' in event.object.message[
-                        "text"] or 'Вправо' in event.object.message["text"]:
-                    self.users[event.object.message["from_id"]].num_keyboard(
-                        event.object.message["text"])
                 if '16+' in event.object.message["text"]:
                     self.users[event.object.message["from_id"]].x = False
                     self.send_message(
                         event.object.message["peer_id"],
                         "Вы решили посмотреть эротические арты, доступные арты представлены в клавиатуре",
-                        "first_keyboard.json")
+                        "1keyboard.json")
                 if '18+' in event.object.message["text"]:
                     self.users[event.object.message["from_id"]].x = True
                     self.send_message(
                         event.object.message["peer_id"],
                         "Вы решили посмотреть хентай арты, доступные арты представлены в клавиатуре",
-                        "first_keyboard.json")
+                        "1keyboard.json")
                 if 'Начать' in event.object.message["text"]:
                     self.send_message(
                         event.object.message["peer_id"],
                         "Данный бот выводит картинки эротического содержания, выберите возраст получаемых картинок",
                         "start_keyboard.json")
+                if 'Влево' in event.object.message["text"] or 'Вправо' in event.object.message["text"]:
+                  self.users[event.object.message["from_id"]].num_keyboard(event.object.message["text"])
+                  if not self.users[event.object.message["from_id"]].x:
+                        self.send_message(event.object.message["peer_id"], self.users[event.object.message["from_id"]].number_of_keyboard, f'{self.users[event.object.message["from_id"]].number_of_keyboard}keyboard.json')
+                  else:
+                        self.send_message(event.object.message["peer_id"], self.users[event.object.message["from_id"]].number_of_keyboard_x, f'{self.users[event.object.message["from_id"].number_of_keyboard_x]}keyboard.json')
                 if event.object.message["text"] in self.titles:
                   picture = self.send_picture(self.users[event.object.message["from_id"]].find_picture(event.object.message["text"]))
                   if picture:
                       self.send_message(
                       event.object.message["peer_id"],
                       '\t',
-                      keyboard="keyboard.json",
                       attachment=picture)
                   else:
                     self.users[event.object.message["from_id"]].shuffle_files()
-                    self.send_message(event.object.message["peer_id"], 'Картинки кончились, но мы их сейчас перемешаем...', keyboard="keyboard.json")
+                    self.send_message(event.object.message["peer_id"], 'Картинки кончились, но мы их сейчас перемешаем...', keyboard=f"{self.users[event.object.message['from_id']].number_of_keyboard}keyboard.json")
 
     def send_message(self,
                      peer_id,
                      message,
-                     keyboard="first_keyboard.json",
+                     keyboard="1keyboard.json",
                      attachment=None):
         self.vk_api.messages.send(peer_id=peer_id,
                                   message=message,
@@ -105,6 +106,7 @@ class User():
         self.x = False
         self.all_titles = {
             'Fire Force': 'ff',
+            'Gawr Gura': 'gg',
             'Hotel Transylvania': 'htr',
             'Genshin Impact': 'gi',
             'KonoSuba': 'ko',
@@ -149,17 +151,17 @@ class User():
         }
 
     def num_keyboard(self, message):
-        if self.x:
+        if not self.x:
             if message.lower() == 'влево':
-                self.number_of_keyboard = (self.number_of_keyboard + 1) % 4
+                self.number_of_keyboard = 1 +(self.number_of_keyboard + 1) % 3
             else:
-                self.number_of_keyboard = (self.number_of_keyboard - 1) % 4
+                self.number_of_keyboard = 1 +(self.number_of_keyboard) % 3
             return self.number_of_keyboard
         else:
             if message.lower() == 'влево':
-                self.number_of_keyboard_x = (self.number_of_keyboard_x + 1) % 4
+                self.number_of_keyboard_x = 1 +(self.number_of_keyboard_x + 1) % 3
             else:
-                self.number_of_keyboard_x = (self.number_of_keyboard_x - 1) % 4
+                self.number_of_keyboard_x = 1 +(self.number_of_keyboard_x) % 3
             return self.number_of_keyboard_x
 
     def search_name(self, name: str):
